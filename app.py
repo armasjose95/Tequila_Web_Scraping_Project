@@ -1,7 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-url = 'https://www.binnys.com/'
+url = 'https://www.mysa.wine/'
 
 
 headers = [{
@@ -10,10 +10,10 @@ headers = [{
 
 
 page = requests.get(
-    'https://www.binnys.com/spirits/tequila/?refinementList%5BproductVarietal%5D%5B0%5D=Blanco')
+    'https://mysa.wine/collections/orange-natural-wine-online')
 soup = BeautifulSoup(page.content, 'html.parser')
 
 
-productList = soup.find_all('div', class_='product-item')
+productList = soup.findAll('div', class_="collection__products")
 
 print(productList)

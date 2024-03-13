@@ -16,4 +16,13 @@ soup = BeautifulSoup(page.content, 'html.parser')
 
 productList = soup.findAll('div', class_="collection__products")
 
-print(productList)
+# print(productList)
+
+# Iterate over each product in productList to find the 'price' class within each
+for product in productList:
+    price = product.find_all(class_='price')  # Adjust the class name as needed
+    print(price)
+
+
+#price = productList.find('price')
+# print(price)

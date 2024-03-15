@@ -24,11 +24,14 @@ for x in range(1, 4):
         price = product.find_all(class_='price')
         print(price)
 
-    #price = productList.find('price')
-    # print(price)
-
     for wine in productList:
         for link in wine.find_all('a', href=True):
             wineLinks.append(url + link['href'])
 print(wineLinks)
 print(len(wineLinks))
+
+
+testLink = 'https://mysa.wine/products/les-vins-pirouettes-brutal-de-claude-blanc'
+page = requests.get(testLink, headers=headers)
+soup = BeautifulSoup(page.content, 'html.parser')
+print(soup.find('h1', class_='product__title heading-size-9'))

@@ -19,11 +19,11 @@ for x in range(1, 4):
     # print(productList)
 
     # Iterate over each product in productList to find the 'price' class within each
-    for product in productList:
+    """for product in productList:
         # Adjust the class name as needed
         prices = product.find_all(class_='price')
         for price in prices:
-            print(price.text.strip())
+            print(price.text.strip())"""
 
     for wine in productList:
         for link in wine.find_all('a', href=True):
@@ -37,3 +37,4 @@ testLink = 'https://mysa.wine/products/les-vins-pirouettes-brutal-de-claude-blan
 page = requests.get(testLink, headers=headers)
 soup = BeautifulSoup(page.content, 'html.parser')
 print(soup.find('h1', class_="product__title heading-size-9").text.strip())
+print(soup.find('span', class_='product__price accent-size-5').text.strip())

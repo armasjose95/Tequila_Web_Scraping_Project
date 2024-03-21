@@ -36,5 +36,9 @@ for x in range(1, 4):
 testLink = 'https://mysa.wine/products/les-vins-pirouettes-brutal-de-claude-blanc'
 page = requests.get(testLink, headers=headers)
 soup = BeautifulSoup(page.content, 'html.parser')
-print(soup.find('h1', class_="product__title heading-size-9").text.strip())
-print(soup.find('span', class_='product__price accent-size-5').text.strip())
+name = soup.find('h1', class_="product__title heading-size-9").text.strip()
+price = soup.find('span', class_='product__price accent-size-5').text.strip()
+description = soup.find('p', style_='text-align:center;')
+print(name)
+print(price)
+print(description)

@@ -9,7 +9,7 @@ headers = {
 }
 
 wineLinks = []
-for x in range(1, 4):
+for x in range(1, 3):
     page = requests.get(
         f'https://mysa.wine/collections/natural-wine-store?page={x}')
     soup = BeautifulSoup(page.content, 'html.parser')
@@ -33,12 +33,17 @@ for x in range(1, 4):
 # print(len(wineLinks))
 
 
-testLink = 'https://mysa.wine/products/les-vins-pirouettes-brutal-de-claude-blanc'
-page = requests.get(testLink, headers=headers)
-soup = BeautifulSoup(page.content, 'html.parser')
-name = soup.find('h1', class_="product__title heading-size-9").text.strip()
-price = soup.find('span', class_='product__price accent-size-5').text.strip()
-description = soup.find('p', style_='text-align:center;')
-print(name)
-print(price)
-print(description)
+#testLink = 'https://mysa.wine/products/les-vins-pirouettes-brutal-de-claude-blanc'
+for link in wineLinks:
+    page = requests.get(link, headers=headers)
+    soup = BeautifulSoup(page.content, 'html.parser')
+    name = soup.find('h1', class_="product__title heading-size-9").text.strip()
+    price = soup.find(
+        'span', class_='product__price accent-size-5').text.strip()
+    description = soup.find('div', class_="tab-content__inner").text.strip()
+    drink = {
+        'name': name,
+        'price': price,
+        'description': description
+    }
+    print(drink)

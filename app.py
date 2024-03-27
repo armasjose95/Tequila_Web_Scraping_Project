@@ -32,20 +32,20 @@ for x in range(1, 4):
 # print(wineLinks)
 # print(len(wineLinks))
 
-
 #testLink = 'https://mysa.wine/products/les-vins-pirouettes-brutal-de-claude-blanc'
 
 for link in wineLinks:
     page = requests.get(link, headers=headers)
     soup = BeautifulSoup(page.content, 'html.parser')
 
-    name = soup.find('h1', class_="product__title heading-size-9").text.strip()
-    price = soup.find(
-        'span', class_='product__price accent-size-5').text.strip()
-    description = soup.find('div', class_="tab-content__inner").text.strip()
-    drink = {
+    #name = soup.find('h1', class_="product__title heading-size-9").text.strip()
+    #price = soup.find('span', class_='product__price accent-size-5').text.strip()
+    description = set()
+    description = soup.findAll(
+        'p', style="text-align:center;")  # .text.strip()
+    """drink = {
         'name': name,
         'price': price,
         'description': description
-    }
-    print(drink)
+        }"""
+    print(description)

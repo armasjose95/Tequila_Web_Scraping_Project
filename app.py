@@ -9,7 +9,7 @@ headers = {
 }
 
 wineLinks = set()
-for x in range(1, 3):
+for x in range(1, 4):
     page = requests.get(
         f'https://mysa.wine/collections/natural-wine-store?page={x}')
     soup = BeautifulSoup(page.content, 'html.parser')
@@ -43,9 +43,9 @@ for link in wineLinks:
     price = soup.find(
         'span', class_='product__price accent-size-5').text.strip()
     description = soup.find('div', class_="tab-content__inner").text.strip()
-    """drink = {
+    drink = {
         'name': name,
         'price': price,
         'description': description
-    }"""
-    print(name)
+    }
+    print(drink)

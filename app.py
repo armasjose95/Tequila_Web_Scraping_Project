@@ -40,12 +40,21 @@ for link in wineLinks:
 
     #name = soup.find('h1', class_="product__title heading-size-9").text.strip()
     #price = soup.find('span', class_='product__price accent-size-5').text.strip()
-    description = set()
-    description = soup.findAll(
-        'p', style="text-align:center;")  # .text.strip()
+    #description = set()
+    #description = soup.findAll('p', style="text-align:center;").text.strip()
     """drink = {
         'name': name,
         'price': price,
         'description': description
         }"""
+    # Find description under <p> elements
+    p_description = soup.find_all('p', style="text-align:center;")
+    p_text = " ".join([p.text.strip() for p in p_description])
+
+    # Find description under <h3> elements
+    h3_description = soup.find_all('h3', style="text-align:center;")
+    h3_text = " ".join([h3.text.strip() for h3 in h3_description])
+
+    # Combine descriptions from both types of elements
+    description = p_text + " " + h3_text
     print(description)

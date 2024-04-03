@@ -37,12 +37,11 @@ for x in range(1, 4):
 for link in wineLinks:
     page = requests.get(link, headers=headers)
     soup = BeautifulSoup(page.content, 'html.parser')
-
+    """
     name = soup.find('h1', class_="product__title heading-size-9").text.strip()
-    price = soup.find(
-        'span', class_='product__price accent-size-5').text.strip()
+    price = soup.find('span', class_='product__price accent-size-5').text.strip()
     #description = set()
-    #description = soup.findAll('p', style="text-align:center;").text.strip()
+    #description = soup.findAll('p', style="text-align:center;").text.strip()"""
 
     # Find description under <p> elements
     p_description = soup.find_all('p', style="text-align:center;")
@@ -52,14 +51,15 @@ for link in wineLinks:
     h3_description = soup.find_all('h3', style="text-align:center;")
     h3_text = " ".join([h3.text.strip() for h3 in h3_description])
 
-    justP_description = soup.find_all('p')
+    justP_description = soup.find_all(
+        'div', class_="tab-content__entry tab-content__entry--truncate")
     justP_text = " ".join([justp.text.strip() for justp in justP_description])
 
     # Combine descriptions from both types of elements
     description = p_text + " " + h3_text + " " + justP_text
-    drink = {
+    """drink = {
         'name': name,
         'price': price,
         'description': description
-    }
-    print(drink)
+    }"""
+    print(description)

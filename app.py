@@ -42,11 +42,16 @@ for link in wineLinks:
     price = soup.find(
         'span', class_='product__price accent-size-5').text.strip()
     description = soup.find('div', class_="tab-content__inner").text.strip()
-
+    
     drink = {
         'name': name,
         'price': price,
         'description': description
     }
 
-    print(drink)
+    # Remove any non-numeric characters from the price text and convert it to a float
+    priceTextToNum = float(''.join(filter(str.isdigit, price))) / 100
+    if priceTextToNum < 25:
+        print(drink)
+
+    

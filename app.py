@@ -1,3 +1,4 @@
+import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 
@@ -49,9 +50,14 @@ for link in wineLinks:
         'description': description
     }
 
+    
+    
     # Remove any non-numeric characters from the price text and convert it to a float
     priceTextToNum = float(''.join(filter(str.isdigit, price))) / 100
     if priceTextToNum < 25:
         print(drink)
+        #productList.append(drink)
 
+
+df = pd.DataFrame(productList)
     

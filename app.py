@@ -1,4 +1,4 @@
-import pandas as pd
+# import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 
@@ -33,31 +33,28 @@ for x in range(1, 4):
 # print(wineLinks)
 # print(len(wineLinks))
 
-#testLink = 'https://mysa.wine/products/cal-xurriu-instint-animal-blanc'
+# testLink = 'https://mysa.wine/products/cal-xurriu-instint-animal-blanc'
 
 for link in wineLinks:
     page = requests.get(link, headers=headers)
     soup = BeautifulSoup(page.content, 'html.parser')
 
-    name = soup.find('h1', class_="product__title heading-size-9").text.strip()
+    name = soup.find('div', class_="product__title__wrapper").text.strip()
     price = soup.find(
         'span', class_='product__price accent-size-5').text.strip()
     description = soup.find('div', class_="tab-content__inner").text.strip()
-    
+
     drink = {
         'name': name,
         'price': price,
         'description': description
     }
 
-    
-    
     # Remove any non-numeric characters from the price text and convert it to a float
     priceTextToNum = float(''.join(filter(str.isdigit, price))) / 100
-    if priceTextToNum < 25:
+    if priceTextToNum < 26:
         print(drink)
-        #productList.append(drink)
+        # productList.append(drink)
 
 
-df = pd.DataFrame(productList)
-    
+# df = pd.DataFrame(productList)

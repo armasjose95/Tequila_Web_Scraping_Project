@@ -45,8 +45,8 @@ for link in wineLinks:
         name = name_element.text.strip()
     else:
         name = "Unknown"
-    """   
-    price = soup.find('span', class_='product__price accent-size-5').text.strip()"""
+
+    # price = soup.find('span', class_='product__price accent-size-5').text.strip()
 
     price_element = soup.find('h1', class_="product__price accent-size-5")
     if price_element is not None:
@@ -54,7 +54,13 @@ for link in wineLinks:
     else:
         price = "Unknown"
 
-    description = soup.find('div', class_="tab-content__inner").text.strip()
+    # description = soup.find('div', class_="tab-content__inner").text.strip()
+
+    description_element = soup.find('div', class_="tab-content__inner")
+    if description_element is not None:
+        description = description_element.text.strip()
+    else:
+        description = "Unknown"
 
     drink = {
         'name': name,
@@ -62,11 +68,23 @@ for link in wineLinks:
         'description': description
     }
 
-    # Remove any non-numeric characters from the price text and convert it to a float
+    """# Remove any non-numeric characters from the price text and convert it to a float
     priceTextToNum = float(''.join(filter(str.isdigit, price))) / 100
     if priceTextToNum < 26:
         print(drink)
-        # productList.append(drink)
+        # productList.append(drink)"""
+
+    # Remove non-numeric characters from the price text
+    cleaned_price_text = ''.join(filter(str.isdigit, price))
+    # Convert the cleaned price text to a float (assuming the price is in cents)
+    try:
+        price_in_cents = float(cleaned_price_text) / 100
+    except ValueError:
+        price_in_cents = None  # or some default value
+
+    # Check if the price is less than $25 before printing the drink
+    if price_in_cents is not None and price_in_cents < 25:
+        print(drink)
 
 
 # df = pd.DataFrame(productList)

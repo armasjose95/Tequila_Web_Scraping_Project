@@ -39,9 +39,21 @@ for link in wineLinks:
     page = requests.get(link, headers=headers)
     soup = BeautifulSoup(page.content, 'html.parser')
 
-    name = soup.find('div', class_="product__title__wrapper").text.strip()
-    price = soup.find(
-        'span', class_='product__price accent-size-5').text.strip()
+    # name = soup.find('div', class_="product__title__wrapper").text.strip()
+    name_element = soup.find('h1', class_="product__title heading-size-9")
+    if name_element is not None:
+        name = name_element.text.strip()
+    else:
+        name = "Unknown"
+    """   
+    price = soup.find('span', class_='product__price accent-size-5').text.strip()"""
+
+    price_element = soup.find('h1', class_="product__price accent-size-5")
+    if price_element is not None:
+        price = price_element.text.strip()
+    else:
+        price = "Unknown"
+
     description = soup.find('div', class_="tab-content__inner").text.strip()
 
     drink = {

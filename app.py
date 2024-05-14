@@ -87,4 +87,21 @@ for link in wineLinks:
         print(drink)
 
 
-# df = pd.DataFrame(productList)
+# df = pd.DataFrame(productList, columns = drink)
+
+
+# enter titles and data into pandas data frame
+df = pd.DataFrame(rows_of_data, columns=hockey_column_titles)
+
+
+df.to_csv(r'/Users/josearmas/Desktop/Hockey_Scraping_Project.csv', index=False)
+
+df = pd.DataFrame(data_rows, columns=world_table_titles)
+
+
+# export this into a CSV
+df.to_csv(
+    r'/Users/josearmas/Desktop/Fortune_100_Web_Scraping_Project.csv', index=False)
+
+
+ss
